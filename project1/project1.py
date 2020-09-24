@@ -33,11 +33,26 @@ def linegraph():
 
 def bargraph():
     dataArray = readFile()
-    artists = dataArray['Artist.Name'].values.tolist()
-    artists_count = dataArray['Artist.Name'].value_counts()
+    artists = dataArray['Genre'].values.tolist()
+    artists_count = dataArray['Genre'].value_counts()
+    res = []
+    for i in artists:
+        if i not in res:
+            res.append(i)
+    x=[]
+    for i in range(1, len(res)+1):
+        x.append(i)
     y = artists_count.tolist()
-    plot.bar(artists, y)
-    plot.xlabel("artist")
+    plot.bar(x, y, width=.8 )
+    plot.xlabel("genre")
     plot.ylabel('count')
     plot.show()
+
+def circlegraph():
+    dataArray = readFile()
+    artists_count = dataArray['Artist.Name'].value_counts()
+    y = artists_count.tolist()
+    plot.pie(y)
+    plot.show()
+
 bargraph()
